@@ -8,7 +8,7 @@
         public Bid(Interested client, double value)
         {
             if (value < 0)
-                throw new System.ArgumentException(" Bid`s value should be greater or equals to zero.");
+                throw new System.ArgumentException("Bid`s value should be greater or equals to zero.");
 
             Client = client;
             Value = value;

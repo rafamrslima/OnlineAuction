@@ -1,6 +1,7 @@
 ﻿using Alura.LeilaoOnline.Core;
 using Xunit;
 using Alura.LeilaoOnline.Core.Interfaces;
+using System;
 
 namespace Alura.LeilaoOnline.Tests
 {
@@ -20,6 +21,7 @@ namespace Alura.LeilaoOnline.Tests
             var mike = new Interested("Mike", auction);
 
             auction.StartAuction();
+
             for (int i = 0; i < offers.Length; i++)
             {
                 if ((i % 2 == 0))
@@ -73,15 +75,13 @@ namespace Alura.LeilaoOnline.Tests
             //Arranje 
             IEvaluationType evaluationType = new HigherValue();
             var auction = new Auction("Van Gogh", evaluationType);
+             
+            //Act
+            Action act = () => auction.FinishAuction();
 
-            //Assert
-            var exception = Assert.Throws<System.InvalidOperationException>(
-                //Act - método sob teste
-                () => auction.FinishAuction()
-            );
-
-            var expectedMessage = "Is not possible to finish the auction before it has started.";
-            Assert.Equal(expectedMessage, exception.Message);
+            //assert
+            Assert.Equal("Is not possible to finish the auction before it has started.",
+                Assert.Throws<InvalidOperationException>(act).Message); 
         }
 
         [Fact]

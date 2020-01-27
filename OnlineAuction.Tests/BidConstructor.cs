@@ -1,4 +1,5 @@
 ﻿using Alura.LeilaoOnline.Core;
+using System;
 using Xunit;
 
 namespace Alura.LeilaoOnline.Tests
@@ -11,11 +12,12 @@ namespace Alura.LeilaoOnline.Tests
             //Arranje
             var negativeValue = -100;
 
-            //Assert
-            Assert.Throws<System.ArgumentException>(
-                //Act
-                () => new Bid(null, negativeValue)
-            );
+            //Act
+            Action act = () => new Bid(null, negativeValue);
+
+            //assert
+             Assert.Equal("Bid`s value should be greater or equals to zero.", 
+                 Assert.Throws<ArgumentException>(act).Message); 
         }
 
     }
